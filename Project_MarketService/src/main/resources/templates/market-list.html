@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Market Orders</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f5f5f5; }
+    .msg { color: green; margin-bottom: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+<h1>Market Orders</h1>
+<div th:if="${message}" class="msg" th:text="${message}"></div>
+<table>
+  <tr>
+    <th>Order ID</th><th>Ticker</th><th>Qty</th><th>Bid</th><th>Ask</th><th>Last</th><th>Exchange</th><th>Status</th><th>Actions</th>
+  </tr>
+  <tr th:each="order : ${marketOrders}">
+    <td th:text="${order.orderId}"></td>
+    <td th:text="${order.tickerSymbol}"></td>
+    <td th:text="${order.quantity}"></td>
+    <td th:text="${order.bid}"></td>
+    <td th:text="${order.ask}"></td>
+    <td th:text="${order.last}"></td>
+    <td th:text="${order.typeOfExchange}"></td>
+    <td th:text="${order.confirmationStatus}"></td>
+    <td>
+      <a th:href="@{'/market/edit/' + ${order.id}}" class="action-btn">✏️ Edit</a>
+      <a th:href="@{'/market/delete/' + ${order.id}}" class="action-btn" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+    </td>
+  </tr>
+</table>
+<a href="/market/home">🔙 Back to Home</a>
+</body>
+</html>

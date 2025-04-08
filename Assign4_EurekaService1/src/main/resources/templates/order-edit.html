@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Order</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    form { max-width: 600px; }
+    label { display: block; margin-top: 15px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; background: #2980b9; color: white; border: none; cursor: pointer; }
+    button:hover { background: #2471a3; }
+  </style>
+</head>
+<body>
+<h1>Edit Order</h1>
+<form th:action="@{/orders/update}" th:object="${order}" method="post">
+
+  <label>Order ID:</label>
+  <input type="text" th:field="*{orderId}" readonly />
+
+  <label>Ticker Symbol:</label>
+  <input type="text" th:field="*{tickerSymbol}" required />
+
+  <label>Quantity:</label>
+  <input type="number" th:field="*{quantity}" required />
+
+  <label>Order Amount:</label>
+  <input type="number" step="0.01" th:field="*{orderAmt}" required />
+
+  <label>Order Type:</label>
+  <select th:field="*{orderType_BuyOrSell}">
+    <option value="BUY">BUY</option>
+    <option value="SELL">SELL</option>
+  </select>
+
+  <label>Add More As Required:</label>
+  <input type="checkbox" th:field="*{addMoreAsRequired}" />
+
+  <label>Fee ID:</label>
+  <input type="text" th:field="*{feeId}" />
+
+  <button type="submit">Update Order</button>
+</form>
+<a href="/orders/list">🔙 Back to Orders List</a>
+</body>
+</html>

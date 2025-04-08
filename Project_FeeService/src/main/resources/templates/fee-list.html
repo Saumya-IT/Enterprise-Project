@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Fees</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f5f5f5; }
+    .msg { color: green; margin-bottom: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+<h1>All Fees</h1>
+<div th:if="${message}" class="msg" th:text="${message}"></div>
+<table>
+  <tr>
+    <th>Fee ID</th><th>Type</th><th>Amount</th><th>Tax</th><th>Date</th><th>Time</th><th>Actions</th>
+  </tr>
+  <tr th:each="fee : ${fees}">
+    <td th:text="${fee.feeId}"></td>
+    <td th:text="${fee.feeType ? 'BUY' : 'SELL'}"></td>
+    <td th:text="${fee.feeAmt}"></td>
+    <td th:text="${fee.feeSalestax}"></td>
+    <td th:text="${fee.feeDate}"></td>
+    <td th:text="${fee.feeTime}"></td>
+    <td>
+      <a th:href="@{'/fees/edit/' + ${fee.id}}">✏️ Edit</a>
+      <a th:href="@{'/fees/delete/' + ${fee.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+    </td>
+  </tr>
+</table>
+<a href="/fees/home">🔙 Back to Home</a>
+</body>
+</html>

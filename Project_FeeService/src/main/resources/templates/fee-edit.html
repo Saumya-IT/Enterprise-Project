@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Fee</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    form { max-width: 600px; }
+    label { display: block; margin-top: 15px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; background: #8e44ad; color: white; border: none; cursor: pointer; }
+    button:hover { background: #71368a; }
+  </style>
+</head>
+<body>
+<h1>Edit Fee</h1>
+<form th:action="@{/fees/update}" th:object="${fee}" method="post">
+
+  <label>Fee ID:</label>
+  <input type="text" th:field="*{feeId}" readonly />
+
+  <label>Fee Type:</label>
+  <select th:field="*{feeType}">
+    <option value="true">BUY</option>
+    <option value="false">SELL</option>
+  </select>
+
+  <label>Fee Amount:</label>
+  <input type="number" step="0.01" th:field="*{feeAmt}" required />
+
+  <label>Sales Tax:</label>
+  <input type="number" step="0.01" th:field="*{feeSalestax}" required />
+
+  <label>Fee Date:</label>
+  <input type="text" th:field="*{feeDate}" required />
+
+  <label>Fee Time:</label>
+  <input type="text" th:field="*{feeTime}" required />
+
+  <button type="submit">Update Fee</button>
+</form>
+<a href="/fees/list">🔙 Back to Fee List</a>
+</body>
+</html>

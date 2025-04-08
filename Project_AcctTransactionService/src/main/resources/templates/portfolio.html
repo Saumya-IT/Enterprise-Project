@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Summary</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 40px; }
+    h1 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    th { background-color: #f5f5f5; }
+  </style>
+</head>
+<body>
+<h1>📊 Portfolio Summary</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Total BUY</th>
+      <th>Total SELL</th>
+      <th>Net Holding</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="row : ${portfolio}">
+      <td th:text="${row.tickerSymbol}">AAPL</td>
+      <td th:text="${row.totalBuyQuantity}">0</td>
+      <td th:text="${row.totalSellQuantity}">0</td>
+      <td th:text="${row.netHolding}">0</td>
+    </tr>
+  </tbody>
+</table>
+<a href="/transactions/list">🔙 Back to Transactions</a>
+</body>
+</html>

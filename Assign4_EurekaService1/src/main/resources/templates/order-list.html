@@ -8,39 +8,44 @@
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
     th { background-color: #f5f5f5; }
-    .action-btn { padding: 4px 8px; margin: 0 2px; text-decoration: none; color: white; border-radius: 4px; }
-    .edit-btn { background-color: #3498db; }
-    .delete-btn { background-color: #e74c3c; }
-    .edit-btn:hover { background-color: #2980b9; }
-    .delete-btn:hover { background-color: #c0392b; }
     .msg { margin: 10px 0; color: green; font-weight: bold; }
   </style>
 </head>
 <body>
   <h1>All Orders</h1>
+
   <div th:if="${message}" class="msg" th:text="${message}"></div>
+
   <table>
     <thead>
       <tr>
-        <th>ID</th><th>Symbol</th><th>Qty</th><th>Amount</th><th>Type</th><th>Date</th><th>Fee</th><th>Actions</th>
+        <th>Order ID</th>
+        <th>Symbol</th>
+        <th>Qty</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Fee ID</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr th:each="ord : ${orders}">
-        <td th:text="${ord.orderId}"></td>
-        <td th:text="${ord.tickerSymbol}"></td>
-        <td th:text="${ord.quantity}"></td>
-        <td th:text="${ord.orderAmt}"></td>
-        <td th:text="${ord.orderType_BuyOrSell}"></td>
-        <td th:text="${ord.orderDate}"></td>
-        <td th:text="${ord.feeId}"></td>
+        <td th:text="${ord.orderId}">1</td>
+        <td th:text="${ord.tickerSymbol}">AAPL</td>
+        <td th:text="${ord.quantity}">10</td>
+        <td th:text="${ord.orderAmt}">100.0</td>
+        <td th:text="${ord.orderType_BuyOrSell}">BUY</td>
+        <td th:text="${ord.orderDate}">2025-04-07</td>
+        <td th:text="${ord.feeId}">FEE123</td>
         <td>
-          <a th:href="@{'/orders/edit/' + ${ord.id}}" class="action-btn edit-btn">✏️ Edit</a>
-          <a th:href="@{'/orders/delete/' + ${ord.id}}" class="action-btn delete-btn" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+          <a th:href="@{'/orders/edit/' + ${ord.id}}">✏️ Edit</a>
+          <a th:href="@{'/orders/delete/' + ${ord.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
+
   <a href="/orders/home">🔙 Back to Home</a>
 </body>
 </html>

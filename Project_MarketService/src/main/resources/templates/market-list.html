@@ -13,26 +13,34 @@
 </head>
 <body>
 <h1>Market Orders</h1>
-<div th:if="${message}" class="msg" th:text="${message}"></div>
+
+<div th:if="${message}" class="msg" th:text="${message}">Message placeholder</div>
+
 <table>
-  <tr>
-    <th>Order ID</th><th>Ticker</th><th>Qty</th><th>Bid</th><th>Ask</th><th>Last</th><th>Exchange</th><th>Status</th><th>Actions</th>
-  </tr>
-  <tr th:each="order : ${marketOrders}">
-    <td th:text="${order.orderId}"></td>
-    <td th:text="${order.tickerSymbol}"></td>
-    <td th:text="${order.quantity}"></td>
-    <td th:text="${order.bid}"></td>
-    <td th:text="${order.ask}"></td>
-    <td th:text="${order.last}"></td>
-    <td th:text="${order.typeOfExchange}"></td>
-    <td th:text="${order.confirmationStatus}"></td>
-    <td>
-      <a th:href="@{'/market/edit/' + ${order.id}}" class="action-btn">✏️ Edit</a>
-      <a th:href="@{'/market/delete/' + ${order.id}}" class="action-btn" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Order ID</th><th>Ticker</th><th>Qty</th><th>Bid</th><th>Ask</th>
+      <th>Last</th><th>Exchange</th><th>Status</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="order : ${marketOrders}">
+      <td th:text="${order.orderId}">1</td>
+      <td th:text="${order.tickerSymbol}">AAPL</td>
+      <td th:text="${order.quantity}">100</td>
+      <td th:text="${order.bid}">150.0</td>
+      <td th:text="${order.ask}">151.0</td>
+      <td th:text="${order.last}">150.5</td>
+      <td th:text="${order.typeOfExchange}">NYSE</td>
+      <td th:text="${order.confirmationStatus}">PLACED</td>
+      <td>
+        <a th:href="@{'/market/edit/' + ${order.id}}">✏️ Edit</a>
+        <a th:href="@{'/market/delete/' + ${order.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
 <a href="/market/home">🔙 Back to Home</a>
 </body>
 </html>

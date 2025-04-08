@@ -12,9 +12,10 @@
   </style>
 </head>
 <body>
+
   <h1>All Orders</h1>
 
-  <div th:if="${message}" class="msg" th:text="${message}"></div>
+  <div th:if="${message}" class="msg" th:text="${message}">Message</div>
 
   <table>
     <thead>
@@ -31,13 +32,13 @@
     </thead>
     <tbody>
       <tr th:each="ord : ${orders}">
-        <td th:text="${ord.orderId}">1</td>
-        <td th:text="${ord.tickerSymbol}">AAPL</td>
-        <td th:text="${ord.quantity}">10</td>
-        <td th:text="${ord.orderAmt}">100.0</td>
-        <td th:text="${ord.orderType_BuyOrSell}">BUY</td>
-        <td th:text="${ord.orderDate}">2025-04-07</td>
-        <td th:text="${ord.feeId}">FEE123</td>
+        <td th:text="${ord.orderId != null ? ord.orderId : 'N/A'}">1</td>
+        <td th:text="${ord.tickerSymbol != null ? ord.tickerSymbol : 'N/A'}">AAPL</td>
+        <td th:text="${ord.quantity != null ? ord.quantity : 0}">10</td>
+        <td th:text="${ord.orderAmt != null ? ord.orderAmt : 0.0}">100.0</td>
+        <td th:text="${ord.orderType_BuyOrSell != null ? ord.orderType_BuyOrSell : 'N/A'}">BUY</td>
+        <td th:text="${ord.orderDate != null ? ord.orderDate : 'N/A'}">2025-04-07</td>
+        <td th:text="${ord.feeId != null ? ord.feeId : 'N/A'}">FEE123</td>
         <td>
           <a th:href="@{'/orders/edit/' + ${ord.id}}">✏️ Edit</a>
           <a th:href="@{'/orders/delete/' + ${ord.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>

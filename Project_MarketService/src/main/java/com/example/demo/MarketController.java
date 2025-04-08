@@ -31,8 +31,12 @@ public class MarketController {
     }
 
     @GetMapping("/list")
-    public String listOrders(Model model) {
+    public String listOrders(Model model,
+                             @RequestParam(value = "message", required = false) String message) {
         model.addAttribute("marketOrders", marketService.getAllOrders());
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "market-list";
     }
 

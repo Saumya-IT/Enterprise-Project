@@ -13,24 +13,31 @@
 </head>
 <body>
 <h1>All Fees</h1>
-<div th:if="${message}" class="msg" th:text="${message}"></div>
+
+<div th:if="${message}" class="msg" th:text="${message}">Flash message here</div>
+
 <table>
-  <tr>
-    <th>Fee ID</th><th>Type</th><th>Amount</th><th>Tax</th><th>Date</th><th>Time</th><th>Actions</th>
-  </tr>
-  <tr th:each="fee : ${fees}">
-    <td th:text="${fee.feeId}"></td>
-    <td th:text="${fee.feeType ? 'BUY' : 'SELL'}"></td>
-    <td th:text="${fee.feeAmt}"></td>
-    <td th:text="${fee.feeSalestax}"></td>
-    <td th:text="${fee.feeDate}"></td>
-    <td th:text="${fee.feeTime}"></td>
-    <td>
-      <a th:href="@{'/fees/edit/' + ${fee.id}}">✏️ Edit</a>
-      <a th:href="@{'/fees/delete/' + ${fee.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Fee ID</th><th>Type</th><th>Amount</th><th>Tax</th><th>Date</th><th>Time</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="fee : ${fees}">
+      <td th:text="${fee.feeId}">F123</td>
+      <td th:text="${fee.feeType ? 'BUY' : 'SELL'}">BUY</td>
+      <td th:text="${fee.feeAmt}">10.0</td>
+      <td th:text="${fee.feeSalestax}">1.5</td>
+      <td th:text="${fee.feeDate}">2025-04-07</td>
+      <td th:text="${fee.feeTime}">10:30 AM</td>
+      <td>
+        <a th:href="@{'/fees/edit/' + ${fee.id}}">✏️ Edit</a>
+        <a th:href="@{'/fees/delete/' + ${fee.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
 <a href="/fees/home">🔙 Back to Home</a>
 </body>
 </html>

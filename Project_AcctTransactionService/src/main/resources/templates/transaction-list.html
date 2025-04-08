@@ -13,25 +13,33 @@
 </head>
 <body>
 <h1>Account Transactions</h1>
-<div th:if="${message}" class="msg" th:text="${message}"></div>
+
+<div th:if="${message}" class="msg" th:text="${message}">Flash message here</div>
+
 <table>
-  <tr>
-    <th>Transaction ID</th><th>Order ID</th><th>Ticker</th><th>Quantity</th><th>Amount</th><th>Type</th><th>Date</th><th>Actions</th>
-  </tr>
-  <tr th:each="tx : ${transactions}">
-    <td th:text="${tx.transactionId}"></td>
-    <td th:text="${tx.orderId}"></td>
-    <td th:text="${tx.tickerSymbol}"></td>
-    <td th:text="${tx.quantity}"></td>
-    <td th:text="${tx.transactionAmount}"></td>
-    <td th:text="${tx.transactionType}"></td>
-    <td th:text="${tx.transactionDate}"></td>
-    <td>
-      <a th:href="@{'/transactions/edit/' + ${tx.id}}">✏️ Edit</a>
-      <a th:href="@{'/transactions/delete/' + ${tx.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Transaction ID</th><th>Order ID</th><th>Ticker</th><th>Quantity</th>
+      <th>Amount</th><th>Type</th><th>Date</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="tx : ${transactions}">
+      <td th:text="${tx.transactionId}">1</td>
+      <td th:text="${tx.orderId}">101</td>
+      <td th:text="${tx.tickerSymbol}">AAPL</td>
+      <td th:text="${tx.quantity}">100</td>
+      <td th:text="${tx.transactionAmount}">1500.00</td>
+      <td th:text="${tx.transactionType}">BUY</td>
+      <td th:text="${tx.transactionDate}">2025-04-07</td>
+      <td>
+        <a th:href="@{'/transactions/edit/' + ${tx.id}}">✏️ Edit</a>
+        <a th:href="@{'/transactions/delete/' + ${tx.id}}" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
+
 <a href="/transactions/home">🔙 Back to Home</a>
 </body>
 </html>

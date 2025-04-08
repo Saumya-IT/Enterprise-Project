@@ -31,8 +31,12 @@ public class OrderController {
     }
 
     @GetMapping("/list")
-    public String getAllOrders(Model model) {
+    public String getAllOrders(Model model,
+                               @RequestParam(value = "message", required = false) String message) {
         model.addAttribute("orders", service.getAllOrders());
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "order-list";
     }
 

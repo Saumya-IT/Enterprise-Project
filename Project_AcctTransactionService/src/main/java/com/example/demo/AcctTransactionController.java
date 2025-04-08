@@ -31,9 +31,13 @@ public class AcctTransactionController {
     }
 
     @GetMapping("/list")
-    public String getAllTransactions(Model model, @ModelAttribute("message") String message) {
+    public String getAllTransactions(
+            Model model,
+            @RequestParam(value = "message", required = false) String message) {
         model.addAttribute("transactions", transactionService.getAllTransactions());
-        model.addAttribute("message", message);
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "transaction-list";
     }
 

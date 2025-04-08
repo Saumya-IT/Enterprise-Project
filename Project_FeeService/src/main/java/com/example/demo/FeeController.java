@@ -39,9 +39,12 @@ public class FeeController {
     }
 
     @GetMapping("/list")
-    public String getAllFees(Model model, @ModelAttribute("message") String message) {
+    public String getAllFees(Model model,
+                             @RequestParam(value = "message", required = false) String message) {
         model.addAttribute("fees", feeService.getAllFees());
-        model.addAttribute("message", message);
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
         return "fee-list";
     }
 
